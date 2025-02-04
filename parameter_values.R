@@ -1,5 +1,5 @@
 # Parameter selection for use in coalescent.jl via musseco model
-
+library(fitMuSSECo)
 
 # High omega, low alpha
 Tg <- 10.2
@@ -11,7 +11,8 @@ mu_v_to_a <- 0.0016
 k <- 10000
 s <- -0.1
 omega <- 1+s
-proportion_a <- 0.85123338
+#proportion_a <- 0.85123338
+proportion_a <- 0.95
 R0 <- proportion_a * ( beta / gamma ) + (1-proportion_a) * ((omega * beta) / gamma)
 
 alpha_q10 <- alpha_q10_mutsel_balance( pa = proportion_a
@@ -81,4 +82,4 @@ params <- data.frame(beta = c(musseco_sim_pars$high_omega_low_alpha[1], musseco_
 
 
 
-write.csv(x = params, file = "params.csv", quote = FALSE, row.names = FALSE)
+write.csv(x = params, file = "params2.csv", quote = FALSE, row.names = FALSE)

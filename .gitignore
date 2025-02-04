@@ -3,3 +3,10 @@
 .Rproj.user
 .DS_Store
 older/
+Vinicius/
+msprime/
+create_dirNames.R
+params.csv
+params2.csv
+mkdir_names.txt
+trees/

@@ -7,11 +7,11 @@ using Interpolations
 using DataFrames
 using CSV 
 
-sampsize = 1000;
-ntr = 2 ; # number of combination of parameter values
+sampsize = 500;
+ntr = 4 ; # number of combination of parameter values
 
 #read parameter values
-params = CSV.read("../params.csv", DataFrame; delim = ',')
+params = CSV.read("../params_all.csv", DataFrame; delim = ',')
 
 
 m = ModelFGY( "musseco2.yaml" )
@@ -69,7 +69,7 @@ end
 
 #simulate tree with combination of parameter value 
 map(1:ntr) do i
-	map(1:10) do j
+	map(1:50) do j
 		s = params.s[i]
 		mu_AV = params.mu_AV[i]
 		mu_VA = params.mu_VA[i]
@@ -83,8 +83,9 @@ map(1:ntr) do i
 		@show m.parameters 
 		sconf = gensampconf( m )
 		tr = SimTree( m, sconf ) 
-		otr = tonewick(tr )
-		write( "trees/param_$(i)_rep_$(j).nwk" , otr )
+		otr = tonewick(tr)
+		mkpath("trees/params_$(i)/rep$(j)")
+		write( "trees/params_$(i)/rep$(j)/param_$(i)_rep_$(j).nwk" , otr )
 	end
 end
 

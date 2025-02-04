@@ -4,10 +4,12 @@
 \alias{get_CI}
 \title{Get confidence interval}
 \usage{
-get_CI(x)
+get_CI(x, MAXCOEFVAR = 1.5)
 }
 \arguments{
-\item{x}{Object of class bissecofit}
+\item{x}{Object of class bissecofit.}
+
+\item{MAXCOEFVAR}{Threshold value for approximate CIs.}
 }
 \value{
 dataframe with the estimated values and their confidence interval

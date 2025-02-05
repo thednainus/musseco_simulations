@@ -129,11 +129,7 @@ prop_inf$true_alpha <- as.factor(prop_inf$true_alpha)
 prop_inf$prop_ancestral <- as.factor(prop_inf$prop_ancestral)
 
 
-
-
-
-
-#plot coverage: omega
+#plot proportion of replicates we could not estimate the upper bound: omega
 quartz()
 ggplot(prop_inf, aes(x = true_omega, y = omega_percentage, shape = prop_ancestral)) +
   geom_point(position = position_dodge(width = 0.5),
@@ -155,7 +151,7 @@ ggplot(prop_inf, aes(x = true_omega, y = omega_percentage, shape = prop_ancestra
   theme(text = element_text(size = 20), legend.position = "bottom")
 
 
-#plot coverage: alpha
+#plot proportion of replicates we could not estimate the upper bound: alpha
 quartz()
 ggplot(prop_inf, aes(x = true_alpha, y = alpha_percentage, shape = prop_ancestral)) +
   geom_point(position = position_dodge(width = 0.5),
@@ -200,7 +196,11 @@ precision_quantiles <- precision %>%
             upper_alpha = quantile(prec_alpha, probs = 0.975))
 
 
-precision_quantiles2 <- precision_quantiles
+prec_quant <- precision_quantiles %>%
+  mutate(
+    upper_available_omega = !is.na(upper) & !is.infinite(upper),
+    upper_for_plot = ifelse(upper_available, upper, y)
+  )
 
 precision_quantiles2$median_alpha[precision_quantiles2$median_alpha == Inf] <- NA
 precision_quantiles2$upper_alpha[precision_quantiles2$upper_alpha == Inf] <- NA
@@ -234,4 +234,71 @@ ggplot(precision_quantiles2, aes(x = true_omega, shape = prop_ancestral)) +
 
 # Relative error ----
 
-#To Do
+relative_error$sample_size <- as.factor(relative_error$sample_size )
+relative_error$true_omega <- as.factor(relative_error$true_omega)
+relative_error$true_alpha <- round(relative_error$true_alpha, 2)
+relative_error$true_alpha <- as.factor(relative_error$true_alpha)
+relative_error$prop_ancestral <- as.factor(relative_error$prop_ancestral)
+
+
+
+relerror_quant <- relative_error %>%
+  group_by(sample_size, param, true_omega, true_alpha, likelihood, prop_ancestral, simulator) %>%
+  reframe(lower_omega = quantile(relative_error_omega, probs = 0.025),
+          median_omega = quantile(relative_error_omega, probs = 0.5),
+          upper_omega = quantile(relative_error_omega, probs = 0.975),
+          lower_alpha = quantile(relative_error_alpha, probs = 0.025),
+          median_alpha = quantile(relative_error_alpha, probs = 0.5),
+          upper_alpha = quantile(relative_error_alpha, probs = 0.975))
+
+
+#plot relative error quantiles for omega
+quartz()
+ggplot(relerror_quant, aes(x = true_omega )) +
+  geom_point(aes(y = median_omega, colour = likelihood, shape = prop_ancestral), size = 4,
+             position = position_dodge(width = 0.7)) +
+  geom_errorbar(aes(ymax = upper_omega, ymin = lower_omega, width = 0.5,
+                    colour = likelihood, shape = prop_ancestral),
+                position = position_dodge(width = 0.7)) +
+  geom_hline(yintercept = 0, linetype="dotted") +
+  facet_grid(simulator ~ sample_size, scales = "free") +
+  scale_colour_manual(values = cbbPalette[c(2,4)],
+                      name = "Likelihood",
+                      breaks = c("normal", "augmented"),
+                      labels = c("coalescent", "augmented")) +
+  guides(color = guide_legend(order = 1),
+         shape = guide_legend(order = 2)) +
+  scale_shape(name = "% ancestral",
+              breaks = c("0.85", "0.95"),
+              labels = c("85%", "95%")) +
+  theme_bw() +
+  xlab("True omega value") +
+  ylab("Relative error quantiles") +
+  theme(text = element_text(size = 20), legend.position = "bottom")
+
+
+#plot relative error quantiles for alpha
+quartz()
+ggplot(relerror_quant, aes(x = true_alpha )) +
+  geom_point(aes(y = median_alpha, colour = likelihood, shape = prop_ancestral), size = 4,
+             position = position_dodge(width = 0.7)) +
+  geom_errorbar(aes(ymax = upper_alpha, ymin = lower_alpha, width = 0.5,
+                    colour = likelihood, shape = prop_ancestral),
+                position = position_dodge(width = 0.7)) +
+  geom_hline(yintercept = 0, linetype="dotted") +
+  facet_grid(simulator ~ sample_size, scales = "free") +
+  scale_colour_manual(values = cbbPalette[c(2,4)],
+                      name = "Likelihood",
+                      breaks = c("normal", "augmented"),
+                      labels = c("coalescent", "augmented")) +
+  guides(color = guide_legend(order = 1),
+         shape = guide_legend(order = 2)) +
+  scale_shape(name = "% ancestral",
+              breaks = c("0.85", "0.95"),
+              labels = c("85%", "95%")) +
+  theme_bw() +
+  xlab("True alpha value") +
+  ylab("Relative error quantiles") +
+  theme(text = element_text(size = 20), legend.position = "bottom")
+
+

@@ -5,9 +5,9 @@ library(glue)
 #number of replicates per parameter value
 nrep <- 50
 
-source("TiPS_simulations/tips_model.R")
+source("coalescent_sim/TiPS_simulations/tips_model.R")
 
-params <- read.csv("params_all.csv")
+params <- read.csv("coalescent_sim/params_all.csv")
 
 i=1
 while(i <= 4){

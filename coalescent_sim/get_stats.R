@@ -11,7 +11,6 @@
 library(dplyr)
 library(stringr)
 
-#get the data that was completed i = 800 iterations
 
 CIs <- list.files("results/CIs", full.names = TRUE)
 

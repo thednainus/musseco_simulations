@@ -7,12 +7,12 @@ library(fitMuSSECo)
 #omega = relative transmission fitness (between-host selection coefficient)
 
 #read true parameter values
-params_true <- read.csv("params_all.csv")
+params_true <- read.csv("coalescent_sim/params_all.csv")
 
 
 #read all data
-#loc_results <- "CoalescentJl_simulations/trees"
-loc_results <- "TiPS_simulations/trees"
+loc_results <- "coalescent_sim/CoalescentJl_simulations/trees"
+#loc_results <- "coalescent_sim/TiPS_simulations/trees"
 all_results <- list.files(loc_results,
                           pattern = "*.rda",
                           recursive = TRUE,
@@ -23,11 +23,11 @@ all_data <- data.frame()
 for(i in 1:length(all_results)){
 
   texts <- str_split(all_results[i], "/")
-  sample_size <- str_split(texts[[1]][3], "_")[[1]][3]
-  params <- texts[[1]][4]
+  sample_size <- str_split(texts[[1]][4], "_")[[1]][3]
+  params <- texts[[1]][5]
   param_n <- str_split(params, "_")[[1]][2]
 
-  rep <- texts[[1]][5]
+  rep <- texts[[1]][6]
   rep <- str_split(rep, "rep")[[1]][2]
 
   res <- load(all_results[i])
@@ -82,5 +82,5 @@ for(i in 1:length(all_results)){
 
 }
 
-saveRDS(all_data, "tips_fit_results.rds")
+saveRDS(all_data, "julia_fit_results.rds")
 

@@ -49,8 +49,8 @@ ci_tips2 <- ci_tips %>%
 cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
 
-simulator_data <- ci_julia2
-#simulator_data <- ci_tips2
+#simulator_data <- ci_julia2
+simulator_data <- ci_tips2
 params <- c(1:4)
 ssizes <- c(500, 1000)
 
@@ -167,7 +167,7 @@ for(i in params){
         ylab("Alpha credible interval") +
         theme(text = element_text(size = 20), legend.position = "bottom")
 
-      plot_omega_au <- ggplot(ssample_n, aes(x = rep )) +
+      plot_omega_au <- ggplot(ssample_au, aes(x = rep )) +
         geom_point(aes(y = omega, colour = likelihood),
                    size = 2,position = position_dodge(width = 0.9)) +
         geom_errorbar(aes(ymax = omega_upper_for_plot, ymin = omega_lower,

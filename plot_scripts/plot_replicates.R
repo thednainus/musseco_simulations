@@ -6,6 +6,8 @@ library(dplyr)
 
 ci_julia <- readRDS("results/CIs/julia_fit_results.rds")
 ci_tips <- readRDS("results/CIs/tips_fit_results.rds")
+#ci for diversitrees
+ci_dst <- readRDS("results/CIs/diversitree_fit_results.rds")
 
 ci_julia$sample_size <- as.factor(ci_julia$sample_size )
 rep_order1 <- as.character(sort(as.numeric(unique(ci_julia$rep))))
@@ -19,6 +21,13 @@ rep_order2 <- as.character(sort(as.numeric(unique(ci_tips$rep))))
 ci_tips$rep <- factor(ci_tips$rep, levels=rep_order2)
 ci_tips$true_alpha <- round(ci_tips$true_alpha, 2)
 ci_tips["simulator"] <- "tips"
+
+
+ci_dst$sample_size <- as.factor(ci_dst$sample_size )
+rep_order3 <- as.character(sort(as.numeric(unique(ci_dst$rep))))
+ci_dst$rep <- factor(ci_dst$rep, levels=rep_order3)
+ci_dst$true_alpha <- round(ci_dst$true_alpha, 2)
+ci_dst["simulator"] <- "diversitree"
 
 
 # Prepare the data to not plot the upper bound when it does not exist
@@ -44,13 +53,25 @@ ci_tips2 <- ci_tips %>%
   )
 
 
+ci_dst2 <- ci_dst %>%
+  mutate(
+    omega_upper_available = !is.infinite(omega_upper),
+    omega_upper_for_plot = ifelse(omega_upper_available, omega_upper, omega),
+    annotation_omega = ifelse(omega_upper_available, "", "*"),
+    alpha_upper_available = !is.infinite(alpha_upper),
+    alpha_upper_for_plot = ifelse(alpha_upper_available, alpha_upper, alpha),
+    annotation_alpha = ifelse(alpha_upper_available, "", "*")
+  )
+
+
 
 #color blind save pallet (http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/#a-colorblind-friendly-palette)
 cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
 
 #simulator_data <- ci_julia2
-simulator_data <- ci_tips2
+#simulator_data <- ci_tips2
+simulator_data <- ci_dst2
 params <- c(1:4)
 ssizes <- c(500, 1000)
 

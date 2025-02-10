@@ -16,8 +16,6 @@ library(reshape2)
 
 coverage_julia <- readRDS("results/julia_coverage.rds")
 coverage_julia["simulator"] <- "Coalescent.jl"
-precision_julia <- readRDS("results/julia_precision.rds")
-precision_julia["simulator"] <- "Coalescent.jl"
 relative_error_julia <- readRDS("results/julia_relative_error.rds")
 relative_error_julia["simulator"] <- "Coalescent.jl"
 prop_inf_julia <- readRDS("results/julia_prop_inf.rds")
@@ -28,8 +26,6 @@ prop_inf_julia["simulator"] <- "Coalescent.jl"
 
 coverage_tips <- readRDS("results/tips_coverage.rds")
 coverage_tips["simulator"] <- "TiPS"
-precision_tips <- readRDS("results/tips_precision.rds")
-precision_tips["simulator"] <- "TiPS"
 relative_error_tips <- readRDS("results/tips_relative_error.rds")
 relative_error_tips["simulator"] <- "TiPS"
 prop_inf_tips <- readRDS("results/tips_prop_inf.rds")
@@ -40,8 +36,6 @@ prop_inf_tips["simulator"] <- "TiPS"
 
 coverage_dst <- readRDS("results/diversitree_coverage.rds")
 coverage_dst["simulator"] <- "diversitree"
-precision_dst <- readRDS("results/diversitree_precision.rds")
-precision_dst["simulator"] <- "diversitree"
 relative_error_dst <- readRDS("results/diversitree_relative_error.rds")
 relative_error_dst["simulator"] <- "diversitree"
 prop_inf_dst <- readRDS("results/diversitree_prop_inf.rds")
@@ -53,9 +47,6 @@ prop_inf_dst["simulator"] <- "diversitree"
 coverage <- rbind(coverage_julia, coverage_tips)
 coverage["prop_ancestral"] <- ifelse(coverage$param == 1 | coverage$param == 2,
                                      0.85, 0.95)
-precision <- rbind(precision_julia, precision_tips)
-precision["prop_ancestral"] <- ifelse(precision$param == 1 | precision$param == 2,
-                                      0.85, 0.95)
 relative_error <- rbind(relative_error_julia, relative_error_tips)
 relative_error["prop_ancestral"] <- ifelse(relative_error$param == 1 | relative_error$param == 2,
                                            0.85, 0.95)

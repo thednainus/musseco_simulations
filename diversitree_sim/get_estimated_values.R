@@ -3,11 +3,12 @@ library(musseco)
 library(stringr)
 library(fitMuSSECo)
 
+
 #alpha = inflation of the mutation rate from A (ancestral) to V (variant)
 #omega = relative transmission fitness (between-host selection coefficient)
 
 #read true parameter values
-params_true <- readRDS("diversitree_sim/diversitree_params.RDS")
+params_true <- readRDS("diversitree_sim/diversitree_params2.RDS")
 
 
 #read all data#readRDS()read all data
@@ -63,23 +64,23 @@ for(i in 1:length(all_results)){
 
   if(param_n == 1){
 
-    r0 <- 1.95
-    pa <- 0.75
+    r0 <-  1.970763
+    pa <- 0.85
 
   }else if(param_n == 2){
 
-    r0 <- 1.74
-    pa <- 0.86
+    r0 <- 1.736439
+    pa <- 0.85
 
   }else if(param_n == 3){
 
-    r0 <- 1.21
-    pa <- 0.75
+    r0 <- 1.243854
+    pa <- 0.95
 
   }else{
 
-    r0 <- 1.09
-    pa <- 0.86
+    r0 <- 1.194794
+    pa <- 0.95
   }
 
 

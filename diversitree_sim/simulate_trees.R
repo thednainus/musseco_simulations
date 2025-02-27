@@ -4,7 +4,7 @@ library(ape)
 library(glue)
 library(diversitree)
 
-n <- 1000 #max taxa in the tree
+n <- 500 #max taxa in the tree
 nrep <- 50 #total number of replicates
 
 simtree <- function( dtpars, max.taxa = 1e3)
@@ -16,7 +16,7 @@ simtree <- function( dtpars, max.taxa = 1e3)
   dtphy
 }
 
-params <- readRDS("diversitree_sim/diversitree_params.RDS")
+params <- readRDS("diversitree_sim/diversitree_params2.RDS")
 
 for(i in 1:ncol(params)){
 

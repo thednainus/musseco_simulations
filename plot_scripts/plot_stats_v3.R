@@ -11,6 +11,9 @@ library(reshape2)
 library(scales)
 library(patchwork)
 
+#source script to get the scatter plots
+source("plot_scripts/plot_sina_v2.R")
+
 #get the data
 
 
@@ -131,10 +134,10 @@ coverage_all_500 <- subset(coverage_all, sample_size == 500)
 
 
 #plot coverage: omega; sample size = 1000 tips ----
-quartz()
+#quartz()
 co1000_omega <- ggplot(coverage_all_1000, aes(x = true_omega, y = omega_percentage,
                               shape = likelihood, colour = simulator_pa_R0)) +
-  geom_point(position = position_dodge(width = 0.8), size = 3) +
+  geom_point(position = position_dodge(width = 0.8), size = 2) +
   geom_hline(yintercept = 100, linetype="dotted") +
   scale_colour_manual(
     values = cbbPalette[c(2,3,4,6,7,8)],
@@ -152,7 +155,7 @@ co1000_omega <- ggplot(coverage_all_1000, aes(x = true_omega, y = omega_percenta
     }
   ) +
   scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 16, augmented = 17),  # Add this line
+                     values = c(normal = 15, augmented = 16),  # Add this line
                      breaks = c("normal", "augmented"),
                      labels = c("Coalescent", "Augmented")) +
   guides(color = guide_legend(order = 1, title = "Simulator"),
@@ -160,13 +163,13 @@ co1000_omega <- ggplot(coverage_all_1000, aes(x = true_omega, y = omega_percenta
   theme_bw() +
   xlab("True omega value") +
   ylab("Coverage") +
-  theme(text = element_text(size = 15), legend.position = "right")
+  theme(text = element_text(size = 12), legend.position = "none")
 
 
 #plot coverage: alpha; sample size = 1000 tips ----
 co1000_alpha <- ggplot(coverage_all_1000, aes(x = true_alpha, y = alpha_percentage,
                               shape = likelihood, colour = simulator_pa_R0)) +
-  geom_point(position = position_dodge(width = 0.5), size = 3) +
+  geom_point(position = position_dodge(width = 0.5), size = 2) +
   geom_hline(yintercept = 100, linetype="dotted") +
   scale_colour_manual(
     values = cbbPalette[c(2,3,4,6,7,8)],
@@ -184,7 +187,7 @@ co1000_alpha <- ggplot(coverage_all_1000, aes(x = true_alpha, y = alpha_percenta
     }
   ) +
   scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 16, augmented = 17),  # Add this line
+                     values = c(normal = 15, augmented = 16),  # Add this line
                      breaks = c("normal", "augmented"),
                      labels = c("Coalescent", "Augmented")) +
   guides(color = guide_legend(order = 1, title = "Simulator"),
@@ -192,15 +195,16 @@ co1000_alpha <- ggplot(coverage_all_1000, aes(x = true_alpha, y = alpha_percenta
   theme_bw() +
   xlab("True alpha value") +
   ylab("Coverage") +
-  theme(text = element_text(size = 15), legend.position = "none")
+  theme(text = element_text(size = 12), legend.position = "none")
 
-co1000_alpha + co1000_omega
+#co1000_alpha + co1000_omega
 
 
 #plot coverage: omega; sample size = 500 tips ----
 co500_omega <- ggplot(coverage_all_500, aes(x = true_omega, y = omega_percentage,
-                                              shape = likelihood, colour = simulator_pa_R0)) +
-  geom_point(position = position_dodge(width = 0.8), size = 3) +
+                                              shape = likelihood,
+                                            colour = simulator_pa_R0)) +
+  geom_point(position = position_dodge(width = 0.8), size = 2) +
   geom_hline(yintercept = 100, linetype="dotted") +
   scale_colour_manual(
     values = cbbPalette[c(2,3,4,6,7,8)],
@@ -218,7 +222,7 @@ co500_omega <- ggplot(coverage_all_500, aes(x = true_omega, y = omega_percentage
     }
   ) +
   scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 16, augmented = 17),  # Add this line
+                     values = c(normal = 15, augmented = 16),  # Add this line
                      breaks = c("normal", "augmented"),
                      labels = c("Coalescent", "Augmented")) +
   guides(color = guide_legend(order = 1, title = "Simulator"),
@@ -226,13 +230,14 @@ co500_omega <- ggplot(coverage_all_500, aes(x = true_omega, y = omega_percentage
   theme_bw() +
   xlab("True omega value") +
   ylab("Coverage") +
-  theme(text = element_text(size = 15), legend.position = "right")
+  theme(text = element_text(size = 12), legend.position = "none")
 
 
 #plot coverage: alpha; sample size = 500 tips ----
 co500_alpha <- ggplot(coverage_all_500, aes(x = true_alpha, y = alpha_percentage,
-                                              shape = likelihood, colour = simulator_pa_R0)) +
-  geom_point(position = position_dodge(width = 0.5), size = 3) +
+                                              shape = likelihood,
+                                            colour = simulator_pa_R0)) +
+  geom_point(position = position_dodge(width = 0.5), size = 2) +
   geom_hline(yintercept = 100, linetype="dotted") +
   scale_colour_manual(
     values = cbbPalette[c(2,3,4,6,7,8)],
@@ -250,7 +255,7 @@ co500_alpha <- ggplot(coverage_all_500, aes(x = true_alpha, y = alpha_percentage
     }
   ) +
   scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 16, augmented = 17),  # Add this line
+                     values = c(normal = 15, augmented = 16),  # Add this line
                      breaks = c("normal", "augmented"),
                      labels = c("Coalescent", "Augmented")) +
   guides(color = guide_legend(order = 1, title = "Simulator"),
@@ -258,9 +263,9 @@ co500_alpha <- ggplot(coverage_all_500, aes(x = true_alpha, y = alpha_percentage
   theme_bw() +
   xlab("True alpha value") +
   ylab("Coverage") +
-  theme(text = element_text(size = 15), legend.position = "none")
+  theme(text = element_text(size = 12), legend.position = "none")
 
-co500_alpha + co500_omega
+#co500_alpha + co500_omega
 
 
 
@@ -298,10 +303,10 @@ prop_inf_all_500 <- subset(prop_inf_all, sample_size == 500)
 
 #plot proportion of replicates we could not estimate the upper bound: omega
 #1000 tips
-quartz()
+#quartz()
 noup1000_omega <- ggplot(prop_inf_all_1000, aes(x = true_omega, y = omega_percentage,
                                               shape = likelihood, colour = simulator_pa_R0)) +
-  geom_point(position = position_dodge(width = 0.8), size = 3) +
+  geom_point(position = position_dodge(width = 0.8), size = 2) +
   geom_hline(yintercept = 0, linetype="dotted") +
   scale_colour_manual(
     values = cbbPalette[c(2,3,4,6,7,8)],
@@ -319,7 +324,7 @@ noup1000_omega <- ggplot(prop_inf_all_1000, aes(x = true_omega, y = omega_percen
     }
   ) +
   scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 16, augmented = 17),  # Add this line
+                     values = c(normal = 15, augmented = 16),  # Add this line
                      breaks = c("normal", "augmented"),
                      labels = c("Coalescent", "Augmented")) +
   guides(color = guide_legend(order = 1, title = "Simulator"),
@@ -327,14 +332,14 @@ noup1000_omega <- ggplot(prop_inf_all_1000, aes(x = true_omega, y = omega_percen
   theme_bw() +
   xlab("True omega value") +
   ylab("% replicates without upper bound") +
-  theme(text = element_text(size = 15), legend.position = "right")
+  theme(text = element_text(size = 12), legend.position = "none")
 
 
 #plot prop inf: alpha
 #1000tips
 noup1000_alpha <- ggplot(prop_inf_all_1000, aes(x = true_alpha, y = alpha_percentage,
                                               shape = likelihood, colour = simulator_pa_R0)) +
-  geom_point(position = position_dodge(width = 0.5), size = 3) +
+  geom_point(position = position_dodge(width = 0.5), size = 2) +
   geom_hline(yintercept = 0, linetype="dotted") +
   scale_colour_manual(
     values = cbbPalette[c(2,3,4,6,7,8)],
@@ -352,7 +357,7 @@ noup1000_alpha <- ggplot(prop_inf_all_1000, aes(x = true_alpha, y = alpha_percen
     }
   ) +
   scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 16, augmented = 17),  # Add this line
+                     values = c(normal = 15, augmented = 16),  # Add this line
                      breaks = c("normal", "augmented"),
                      labels = c("Coalescent", "Augmented")) +
   guides(color = guide_legend(order = 1, title = "Simulator"),
@@ -360,14 +365,14 @@ noup1000_alpha <- ggplot(prop_inf_all_1000, aes(x = true_alpha, y = alpha_percen
   theme_bw() +
   xlab("True alpha value") +
   ylab("% replicates without upper bound") +
-  theme(text = element_text(size = 15), legend.position = "none")
+  theme(text = element_text(size = 12), legend.position = "none")
 
-noup1000_alpha + noup1000_omega
+#noup1000_alpha + noup1000_omega
 
 #plot omega 500tips
 noup500_omega <- ggplot(prop_inf_all_500, aes(x = true_omega, y = omega_percentage,
                                                 shape = likelihood, colour = simulator_pa_R0)) +
-  geom_point(position = position_dodge(width = 0.8), size = 3) +
+  geom_point(position = position_dodge(width = 0.8), size = 2) +
   geom_hline(yintercept = 0, linetype="dotted") +
   scale_colour_manual(
     values = cbbPalette[c(2,3,4,6,7,8)],
@@ -385,7 +390,7 @@ noup500_omega <- ggplot(prop_inf_all_500, aes(x = true_omega, y = omega_percenta
     }
   ) +
   scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 16, augmented = 17),  # Add this line
+                     values = c(normal = 15, augmented = 16),  # Add this line
                      breaks = c("normal", "augmented"),
                      labels = c("Coalescent", "Augmented")) +
   guides(color = guide_legend(order = 1, title = "Simulator"),
@@ -393,14 +398,14 @@ noup500_omega <- ggplot(prop_inf_all_500, aes(x = true_omega, y = omega_percenta
   theme_bw() +
   xlab("True omega value") +
   ylab("% replicates without upper bound") +
-  theme(text = element_text(size = 15), legend.position = "right")
+  theme(text = element_text(size = 12), legend.position = "none")
 
 
 #plot prop inf: alpha
 #500 tips
 noup500_alpha <- ggplot(prop_inf_all_500, aes(x = true_alpha, y = alpha_percentage,
                                                 shape = likelihood, colour = simulator_pa_R0)) +
-  geom_point(position = position_dodge(width = 0.5), size = 3) +
+  geom_point(position = position_dodge(width = 0.5), size = 2) +
   geom_hline(yintercept = 0, linetype="dotted") +
   scale_colour_manual(
     values = cbbPalette[c(2,3,4,6,7,8)],
@@ -418,7 +423,7 @@ noup500_alpha <- ggplot(prop_inf_all_500, aes(x = true_alpha, y = alpha_percenta
     }
   ) +
   scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 16, augmented = 17),  # Add this line
+                     values = c(normal = 15, augmented = 16),  # Add this line
                      breaks = c("normal", "augmented"),
                      labels = c("Coalescent", "Augmented")) +
   guides(color = guide_legend(order = 1, title = "Simulator"),
@@ -426,9 +431,9 @@ noup500_alpha <- ggplot(prop_inf_all_500, aes(x = true_alpha, y = alpha_percenta
   theme_bw() +
   xlab("True alpha value") +
   ylab("% replicates without upper bound") +
-  theme(text = element_text(size = 15), legend.position = "none")
+  theme(text = element_text(size = 12), legend.position = "none")
 
-noup500_alpha + noup500_omega
+#noup500_alpha + noup500_omega
 
 
 
@@ -483,16 +488,16 @@ relerror_quant_500$lower_omega[relerror_quant_500$lower_omega == 0] <- 0.0001
 
 #plot relative error quantiles for omega
 #1000tips
-quartz()
+#quartz()
 rerr_omega_1000 <- ggplot(relerror_quant_1000, aes(x = true_omega )) +
   geom_point(aes(y = median_omega, shape = likelihood, colour = simulator_pa_R0),
-             size = 3, position = position_dodge(width = 0.8)) +
+             size = 2, position = position_dodge(width = 0.8)) +
   geom_errorbar(aes(ymax = upper_omega, ymin = lower_omega, width = 0.4,
                     shape = likelihood, colour = simulator_pa_R0),
                 position = position_dodge(width = 0.8)) +
   scale_y_log10(breaks = c(0.0001, 0.01, 1, 100, 1000),
                 labels = trans_format("log10", math_format(10^.x))) +
-  geom_hline(yintercept = 0.0001, linetype="dotted") + #0.00001 was added here instead of 0 because log of 0 is undefined.
+  geom_hline(yintercept = 0.0001, linetype="dotted") + #0.0001 was added here instead of 0 because log of 0 is undefined.
   scale_colour_manual(
     values = cbbPalette[c(2,3,4,6,7,8)],
     breaks = levels(relerror_quant_1000$simulator_pa_R0),
@@ -509,21 +514,21 @@ rerr_omega_1000 <- ggplot(relerror_quant_1000, aes(x = true_omega )) +
     }
   ) +
   scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 16, augmented = 17),  # Add this line
+                     values = c(normal = 15, augmented = 16),  # Add this line
                      breaks = c("normal", "augmented"),
                      labels = c("Coalescent", "Augmented")) +
   guides(color = guide_legend(order = 1, title = "Simulator"),
          shape = guide_legend(order = 2)) +
   theme_bw() +
   xlab("True omega value") +
-  ylab("Relative error quantiles") +
-  theme(text = element_text(size = 15), legend.position = "right")
+  ylab("Relative error") +
+  theme(text = element_text(size = 12), legend.position = "none")
 
 
 
 rerr_alpha_1000 <- ggplot(relerror_quant_1000, aes(x = true_alpha )) +
   geom_point(aes(y = median_alpha, shape = likelihood, colour = simulator_pa_R0),
-             size = 3, position = position_dodge(width = 0.7)) +
+             size = 2, position = position_dodge(width = 0.7)) +
   geom_errorbar(aes(ymax = upper_alpha, ymin = lower_alpha, width = 0.4,
                     shape = likelihood, colour = simulator_pa_R0),
                 position = position_dodge(width = 0.7)) +
@@ -546,24 +551,24 @@ rerr_alpha_1000 <- ggplot(relerror_quant_1000, aes(x = true_alpha )) +
     }
   ) +
   scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 16, augmented = 17),  # Add this line
+                     values = c(normal = 15, augmented = 16),  # Add this line
                      breaks = c("normal", "augmented"),
                      labels = c("Coalescent", "Augmented")) +
   guides(color = guide_legend(order = 1, title = "Simulator"),
          shape = guide_legend(order = 2)) +
   theme_bw() +
   xlab("True alpha value") +
-  ylab("Relative error quantiles") +
-  theme(text = element_text(size = 15), legend.position = "none")
+  ylab("Relative error") +
+  theme(text = element_text(size = 12), legend.position = "none")
 
-rerr_alpha_1000 + rerr_omega_1000
+#rerr_alpha_1000 + rerr_omega_1000
 
 
 
-quartz()
+#quartz()
 rerr_omega_500 <- ggplot(relerror_quant_500, aes(x = true_omega )) +
   geom_point(aes(y = median_omega, shape = likelihood, colour = simulator_pa_R0),
-             size = 3, position = position_dodge(width = 0.8)) +
+             size = 2, position = position_dodge(width = 0.8)) +
   geom_errorbar(aes(ymax = upper_omega, ymin = lower_omega, width = 0.4,
                     shape = likelihood, colour = simulator_pa_R0),
                 position = position_dodge(width = 0.8)) +
@@ -586,21 +591,21 @@ rerr_omega_500 <- ggplot(relerror_quant_500, aes(x = true_omega )) +
     }
   ) +
   scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 16, augmented = 17),  # Add this line
+                     values = c(normal = 15, augmented = 16),  # Add this line
                      breaks = c("normal", "augmented"),
                      labels = c("Coalescent", "Augmented")) +
   guides(color = guide_legend(order = 1, title = "Simulator"),
          shape = guide_legend(order = 2)) +
   theme_bw() +
   xlab("True omega value") +
-  ylab("Relative error quantiles") +
-  theme(text = element_text(size = 15), legend.position = "right")
+  ylab("Relative error") +
+  theme(text = element_text(size = 12), legend.position = "none")
 
 
 
 rerr_alpha_500 <- ggplot(relerror_quant_500, aes(x = true_alpha )) +
   geom_point(aes(y = median_alpha, shape = likelihood, colour = simulator_pa_R0),
-             size = 3, position = position_dodge(width = 0.7)) +
+             size = 2, position = position_dodge(width = 0.7)) +
   geom_errorbar(aes(ymax = upper_alpha, ymin = lower_alpha, width = 0.4,
                     shape = likelihood, colour = simulator_pa_R0),
                 position = position_dodge(width = 0.7)) +
@@ -623,15 +628,44 @@ rerr_alpha_500 <- ggplot(relerror_quant_500, aes(x = true_alpha )) +
     }
   ) +
   scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 16, augmented = 17),  # Add this line
+                     values = c(normal = 15, augmented = 16),  # Add this line
                      breaks = c("normal", "augmented"),
                      labels = c("Coalescent", "Augmented")) +
   guides(color = guide_legend(order = 1, title = "Simulator"),
          shape = guide_legend(order = 2)) +
   theme_bw() +
   xlab("True alpha value") +
-  ylab("Relative error quantiles") +
-  theme(text = element_text(size = 15), legend.position = "none")
+  ylab("Relative error") +
+  theme(text = element_text(size = 12), legend.position = "none")
 
-rerr_alpha_500 + rerr_omega_500
+#rerr_alpha_500 + rerr_omega_500
+
+#make composite plot for 1000 individuals
+quartz()
+all_plots <- p_alpha  + p_omega + co1000_alpha + co1000_omega +
+  rerr_alpha_1000 + rerr_omega_1000 +
+  plot_layout(ncol = 2, guides = "collect") +
+  plot_annotation(tag_levels = 'A') +
+  theme(legend.position = "none")
+
+all_plots_legend <- p_alpha  + p_omega + co1000_alpha + co1000_omega +
+  rerr_alpha_1000 + rerr_omega_1000 +
+  plot_layout(ncol = 2, guides = "collect") +
+  plot_annotation(tag_levels = 'A') +
+  theme(legend.position = "right")
+
+ggsave(filename = "all_plots_1000tips.pdf",plot = all_plots,  width = 18, height = 20, units = "cm")
+ggsave(filename = "all_plots_1000tips_legend.pdf",plot = all_plots_legend,  width = 18, height = 20, units = "cm")
+
+
+#for 500 individuals
+all_plots500ind <- p_alpha500  + p_omega500 + co500_alpha + co500_omega +
+  rerr_alpha_500 + rerr_omega_500 +
+  plot_layout(ncol = 2, guides = "collect") +
+  plot_annotation(tag_levels = 'A') +
+  theme(legend.position = "none")
+
+
+
+ggsave(filename = "all_plots_500tips.pdf",plot = all_plots500ind,  width = 18, height = 20, units = "cm")
 

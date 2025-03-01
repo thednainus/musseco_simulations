@@ -13,4 +13,4 @@ trees/
 vaccine_escape.R
 HIV_simulations/
 plot_stats_hivsim.R
-hiv_sim_*
+graphic_plots/

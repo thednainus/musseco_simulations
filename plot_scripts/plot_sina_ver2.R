@@ -37,13 +37,14 @@ cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2"
 
 
 #plot scatter plot for omega
-quartz()
+#quartz()
 
 p_omega <- ggplot(cis_julia_1000, aes(x = true_omega, y = omega,
                            shape = likelihood, colour = simulator_pa_R0)) +
   geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values, aes(x = true_omega, y = as.numeric(as.character(true_omega))),
+            size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(2,3)],
     breaks = levels(cis_julia_1000$simulator_pa_R0),
@@ -77,7 +78,8 @@ p_alpha <- ggplot(cis_julia_1000, aes(x = true_alpha, y = alpha,
                                       colour = simulator_pa_R0)) +
   geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))),
+            size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(2,3)],
     breaks = levels(cis_julia_1000$simulator_pa_R0),
@@ -109,9 +111,10 @@ p_alpha <- ggplot(cis_julia_1000, aes(x = true_alpha, y = alpha,
 #500 tips
 p_omega500 <- ggplot(cis_julia_500, aes(x = true_omega, y = omega,
                                       shape = likelihood, colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
+  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values, aes(x = true_omega, y = as.numeric(as.character(true_omega))),
+            size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(2,3)],
     breaks = levels(cis_julia_1000$simulator_pa_R0),
@@ -143,9 +146,9 @@ p_omega500 <- ggplot(cis_julia_500, aes(x = true_omega, y = omega,
 p_alpha500 <- ggplot(cis_julia_500, aes(x = true_alpha, y = alpha,
                                       shape = likelihood,
                                       colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
+  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(2,3)],
     breaks = levels(cis_julia_1000$simulator_pa_R0),

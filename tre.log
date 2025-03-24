@@ -1,0 +1,12 @@
+IQ-TREE multicore version 2.4.0 for MacOS ARM 64-bit built Feb  7 2025
+Developed by Bui Quang Minh, Nguyen Lam Tung, Olga Chernomor, Heiko Schmidt,
+Dominik Schrempf, Michael Woodhams, Ly Trong Nhan, Thomas Wong
+
+Host:    Mac.home (SSE4.2, 16 GB RAM)
+Command: /Applications/iqtree-2.4.0-macOS/bin/iqtree2 --alisim HIV_simulations/alignments/ali -m GTR{3.51951/7.79129/2.15558/3.12071/21.10303/1.00000}+F{0.444/0.156/0.220/0.180}+I{0.063} -t tre --branch-scale 0.0036 --length 105 --out-format fasta
+Seed:    762150 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Tue Mar  4 16:21:13 2025
+Kernel:  SSE2 - 1 threads (8 CPU cores detected)
+
+[Alignment Simulator] Executing
+ERROR: File not found or incorrect input, pls check it again.tre

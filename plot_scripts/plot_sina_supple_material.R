@@ -4,6 +4,7 @@ library(ggplot2); theme_set(theme_bw(base_family ="Helvetica"))
 library(dplyr)
 library(ggforce)
 library(patchwork)
+library(scales)
 
 #get the data
 
@@ -96,11 +97,11 @@ cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2"
 
 p_omega_jl_co1000 <- ggplot(cis_julia_1000_co, aes(x = true_omega, y = omega,
                            shape = likelihood, colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
+  geom_sina(position = position_dodge(width = 0.9), size = 0.4, alpha = 0.8,
             maxwidth = 0.8) +
   geom_sina(data = add_true_values_julia, aes(x = true_omega,
                                               y = as.numeric(as.character(true_omega))),
-            size = 1, shape = 21) +
+            size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(2,3)],
     breaks = levels(cis_julia_1000_co$simulator_pa_R0),
@@ -132,9 +133,9 @@ p_omega_jl_co1000 <- ggplot(cis_julia_1000_co, aes(x = true_omega, y = omega,
 p_alpha_jl_co1000 <- ggplot(cis_julia_1000_co, aes(x = true_alpha, y = alpha,
                                       shape = likelihood,
                                       colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
+  geom_sina(position = position_dodge(width = 0.8), size = 0.4, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_julia, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_julia, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1.2, shape = 23) +
   scale_y_log10(breaks = c(0.0001, 0.01, 1, 100, 1000),
                 labels = trans_format("log10", math_format(10^.x))) +
   scale_colour_manual(
@@ -168,9 +169,9 @@ p_alpha_jl_co1000 <- ggplot(cis_julia_1000_co, aes(x = true_alpha, y = alpha,
 #sina plots for omega for Coalescent.jl for 500 tips ----
 p_omega_jl_co500 <- ggplot(cis_julia_500_co, aes(x = true_omega, y = omega,
                                       shape = likelihood, colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
+  geom_sina(position = position_dodge(width = 0.8), size = 0.4, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_julia, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_julia, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(2,3)],
     breaks = levels(cis_julia_500_co$simulator_pa_R0),
@@ -202,9 +203,9 @@ p_omega_jl_co500 <- ggplot(cis_julia_500_co, aes(x = true_omega, y = omega,
 p_alpha_jl_co500 <- ggplot(cis_julia_500_co, aes(x = true_alpha, y = alpha,
                                       shape = likelihood,
                                       colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
+  geom_sina(position = position_dodge(width = 0.8), size = 0.4, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_julia, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_julia, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1.2, shape = 23) +
   scale_y_log10(breaks = c(0.0001, 0.01, 1, 100, 1000),
                 labels = trans_format("log10", math_format(10^.x))) +
   scale_colour_manual(
@@ -257,9 +258,9 @@ ggsave(filename = "sina_plots_coalescentjl_coalescent500tips.pdf",
 #sina plots for omega for TiPS for 1000 tips ----
 p_omega_tips_co1000 <- ggplot(cis_tips_1000_co, aes(x = true_omega, y = omega,
                                                     shape = likelihood, colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
+  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_tips, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(4,6)],
     breaks = levels(cis_tips_1000_co$simulator_pa_R0),
@@ -291,9 +292,9 @@ p_omega_tips_co1000 <- ggplot(cis_tips_1000_co, aes(x = true_omega, y = omega,
 p_alpha_tips_co1000 <- ggplot(cis_tips_1000_co, aes(x = true_alpha, y = alpha,
                                                     shape = likelihood,
                                                     colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
+  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_tips, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1.2, shape = 23) +
   scale_y_log10(breaks = c(0.0001, 0.01, 1, 100, 1000),
                 labels = trans_format("log10", math_format(10^.x))) +
   scale_colour_manual(
@@ -326,9 +327,9 @@ p_alpha_tips_co1000 <- ggplot(cis_tips_1000_co, aes(x = true_alpha, y = alpha,
 
 p_omega_tips_au1000 <- ggplot(cis_tips_1000_au, aes(x = true_omega, y = omega,
                                                     shape = likelihood, colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
+  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_tips, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(4,6)],
     breaks = levels(cis_tips_1000_au$simulator_pa_R0),
@@ -360,9 +361,9 @@ p_omega_tips_au1000 <- ggplot(cis_tips_1000_au, aes(x = true_omega, y = omega,
 p_alpha_tips_au1000 <- ggplot(cis_tips_1000_au, aes(x = true_alpha, y = alpha,
                                                     shape = likelihood,
                                                     colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
+  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_tips, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1.2, shape = 23) +
   scale_y_log10(breaks = c(0.0001, 0.01, 1, 100, 1000),
                 labels = trans_format("log10", math_format(10^.x))) +
   scale_colour_manual(
@@ -398,7 +399,7 @@ p_omega_tips_co500 <- ggplot(cis_tips_500_co, aes(x = true_omega, y = omega,
                                                   shape = likelihood, colour = simulator_pa_R0)) +
   geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_tips, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(4,6)],
     breaks = levels(cis_tips_500_co$simulator_pa_R0),
@@ -432,7 +433,7 @@ p_alpha_tips_co500 <- ggplot(cis_tips_500_co, aes(x = true_alpha, y = alpha,
                                                   colour = simulator_pa_R0)) +
   geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_tips, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1.2, shape = 23) +
   scale_y_log10(breaks = c(0.0001, 0.01, 1, 100, 1000),
                 labels = trans_format("log10", math_format(10^.x))) +
   scale_colour_manual(
@@ -467,7 +468,7 @@ p_omega_tips_au500 <- ggplot(cis_tips_500_au, aes(x = true_omega, y = omega,
                                                   shape = likelihood, colour = simulator_pa_R0)) +
   geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_tips, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(4,6)],
     breaks = levels(cis_tips_500_au$simulator_pa_R0),
@@ -501,305 +502,7 @@ p_alpha_tips_au500 <- ggplot(cis_tips_500_au, aes(x = true_alpha, y = alpha,
                                                   colour = simulator_pa_R0)) +
   geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
-  scale_y_log10(breaks = c(0.0001, 0.01, 1, 100, 1000),
-                labels = trans_format("log10", math_format(10^.x))) +
-  scale_colour_manual(
-    values = cbbPalette[c(4,6)],
-    breaks = levels(cis_tips_500_au$simulator_pa_R0),
-    labels = function(x) {
-      parsed_labels <- sapply(x, function(label) {
-        parts <- strsplit(label, ": ")[[1]]
-        prefix <- parts[1]
-        parts2 <- strsplit(parts[2], "\\|")[[1]]
-        pa_value <- trimws(parts2[1])
-        r_value <- sub("R\\[0\\]\\s*%~~%\\s*(\\d+\\.?\\d*)", "\\1", trimws(parts2[2]))
-        paste0(prefix, ": ", pa_value, " * ' | ' * R[0] %~~% ", r_value)
-      })
-      parse(text = gsub("pa = ", "pa == ", parsed_labels))
-    }
-  ) +
-  scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 15, augmented = 16),  # Add this line
-                     breaks = c("normal", "augmented"),
-                     labels = c("Coalescent", "Augmented")) +
-  guides(color = guide_legend(order = 1, title = "Simulator"),
-         shape = guide_legend(order = 2)) +
-  theme_bw() +
-  xlab("True alpha value") +
-  ylab("Estimated value") +
-  theme(text = element_text(size = 12), legend.position = "none")
-
-
-#create composite with sina plots
-quartz()
-co_tips_1000 <- p_alpha_tips_co1000 + p_omega_tips_co1000 +
-  p_alpha_tips_au1000 + p_omega_tips_au1000 +
-  plot_annotation(tag_levels = 'A')
-
-co_tips_500 <- p_alpha_tips_co500 + p_omega_tips_co500 +
-  p_alpha_tips_au500 + p_omega_tips_au500
-  plot_annotation(tag_levels = 'A')
-
-
-
-
-ggsave(filename = "sina_plots_tips_1000tips.pdf",
-       plot = co_tips_1000,  width = 18, height = 14, units = "cm")
-
-ggsave(filename = "sina_plots_tips_500tips.pdf",
-       plot = co_tips_500,  width = 18, height = 14, units = "cm")
-
-
-
-#sina plots for omega for TiPS for 1000 tips ----
-p_omega_tips_co1000 <- ggplot(cis_tips_1000_co, aes(x = true_omega, y = omega,
-                                                    shape = likelihood, colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
-            maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
-  scale_colour_manual(
-    values = cbbPalette[c(4,6)],
-    breaks = levels(cis_tips_1000_co$simulator_pa_R0),
-    labels = function(x) {
-      parsed_labels <- sapply(x, function(label) {
-        parts <- strsplit(label, ": ")[[1]]
-        prefix <- parts[1]
-        parts2 <- strsplit(parts[2], "\\|")[[1]]
-        pa_value <- trimws(parts2[1])
-        r_value <- sub("R\\[0\\]\\s*%~~%\\s*(\\d+\\.?\\d*)", "\\1", trimws(parts2[2]))
-        paste0(prefix, ": ", pa_value, " * ' | ' * R[0] %~~% ", r_value)
-      })
-      parse(text = gsub("pa = ", "pa == ", parsed_labels))
-    }
-  ) +
-  scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 15, augmented = 16),  # Add this line
-                     breaks = c("normal", "augmented"),
-                     labels = c("Coalescent", "Augmented")) +
-  guides(color = guide_legend(order = 1, title = "Simulator"),
-         shape = guide_legend(order = 2)) +
-  theme_bw() +
-  xlab("True omega value") +
-  ylab("Estimated value") +
-  theme(text = element_text(size = 12), legend.position = "none")
-
-
-
-p_alpha_tips_co1000 <- ggplot(cis_tips_1000_co, aes(x = true_alpha, y = alpha,
-                                                    shape = likelihood,
-                                                    colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
-            maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
-  scale_y_log10(breaks = c(0.0001, 0.01, 1, 100, 1000),
-                labels = trans_format("log10", math_format(10^.x))) +
-  scale_colour_manual(
-    values = cbbPalette[c(4,6)],
-    breaks = levels(cis_tips_1000_co$simulator_pa_R0),
-    labels = function(x) {
-      parsed_labels <- sapply(x, function(label) {
-        parts <- strsplit(label, ": ")[[1]]
-        prefix <- parts[1]
-        parts2 <- strsplit(parts[2], "\\|")[[1]]
-        pa_value <- trimws(parts2[1])
-        r_value <- sub("R\\[0\\]\\s*%~~%\\s*(\\d+\\.?\\d*)", "\\1", trimws(parts2[2]))
-        paste0(prefix, ": ", pa_value, " * ' | ' * R[0] %~~% ", r_value)
-      })
-      parse(text = gsub("pa = ", "pa == ", parsed_labels))
-    }
-  ) +
-  scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 15, augmented = 16),  # Add this line
-                     breaks = c("normal", "augmented"),
-                     labels = c("Coalescent", "Augmented")) +
-  guides(color = guide_legend(order = 1, title = "Simulator"),
-         shape = guide_legend(order = 2)) +
-  theme_bw() +
-  xlab("True alpha value") +
-  ylab("Estimated value") +
-  theme(text = element_text(size = 12), legend.position = "none")
-
-
-
-p_omega_tips_au1000 <- ggplot(cis_tips_1000_au, aes(x = true_omega, y = omega,
-                                                    shape = likelihood, colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
-            maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
-  scale_colour_manual(
-    values = cbbPalette[c(4,6)],
-    breaks = levels(cis_tips_1000_au$simulator_pa_R0),
-    labels = function(x) {
-      parsed_labels <- sapply(x, function(label) {
-        parts <- strsplit(label, ": ")[[1]]
-        prefix <- parts[1]
-        parts2 <- strsplit(parts[2], "\\|")[[1]]
-        pa_value <- trimws(parts2[1])
-        r_value <- sub("R\\[0\\]\\s*%~~%\\s*(\\d+\\.?\\d*)", "\\1", trimws(parts2[2]))
-        paste0(prefix, ": ", pa_value, " * ' | ' * R[0] %~~% ", r_value)
-      })
-      parse(text = gsub("pa = ", "pa == ", parsed_labels))
-    }
-  ) +
-  scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 15, augmented = 16),  # Add this line
-                     breaks = c("normal", "augmented"),
-                     labels = c("Coalescent", "Augmented")) +
-  guides(color = guide_legend(order = 1, title = "Simulator"),
-         shape = guide_legend(order = 2)) +
-  theme_bw() +
-  xlab("True omega value") +
-  ylab("Estimated value") +
-  theme(text = element_text(size = 12), legend.position = "none")
-
-
-
-p_alpha_tips_au1000 <- ggplot(cis_tips_1000_au, aes(x = true_alpha, y = alpha,
-                                                    shape = likelihood,
-                                                    colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
-            maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
-  scale_y_log10(breaks = c(0.0001, 0.01, 1, 100, 1000),
-                labels = trans_format("log10", math_format(10^.x))) +
-  scale_colour_manual(
-    values = cbbPalette[c(4,6)],
-    breaks = levels(cis_tips_1000_au$simulator_pa_R0),
-    labels = function(x) {
-      parsed_labels <- sapply(x, function(label) {
-        parts <- strsplit(label, ": ")[[1]]
-        prefix <- parts[1]
-        parts2 <- strsplit(parts[2], "\\|")[[1]]
-        pa_value <- trimws(parts2[1])
-        r_value <- sub("R\\[0\\]\\s*%~~%\\s*(\\d+\\.?\\d*)", "\\1", trimws(parts2[2]))
-        paste0(prefix, ": ", pa_value, " * ' | ' * R[0] %~~% ", r_value)
-      })
-      parse(text = gsub("pa = ", "pa == ", parsed_labels))
-    }
-  ) +
-  scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 15, augmented = 16),  # Add this line
-                     breaks = c("normal", "augmented"),
-                     labels = c("Coalescent", "Augmented")) +
-  guides(color = guide_legend(order = 1, title = "Simulator"),
-         shape = guide_legend(order = 2)) +
-  theme_bw() +
-  xlab("True alpha value") +
-  ylab("Estimated value") +
-  theme(text = element_text(size = 12), legend.position = "none")
-
-
-
-#sina plots for omega for TiPS for 500 tips ----
-p_omega_tips_co500 <- ggplot(cis_tips_500_co, aes(x = true_omega, y = omega,
-                                                  shape = likelihood, colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
-            maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
-  scale_colour_manual(
-    values = cbbPalette[c(4,6)],
-    breaks = levels(cis_tips_500_co$simulator_pa_R0),
-    labels = function(x) {
-      parsed_labels <- sapply(x, function(label) {
-        parts <- strsplit(label, ": ")[[1]]
-        prefix <- parts[1]
-        parts2 <- strsplit(parts[2], "\\|")[[1]]
-        pa_value <- trimws(parts2[1])
-        r_value <- sub("R\\[0\\]\\s*%~~%\\s*(\\d+\\.?\\d*)", "\\1", trimws(parts2[2]))
-        paste0(prefix, ": ", pa_value, " * ' | ' * R[0] %~~% ", r_value)
-      })
-      parse(text = gsub("pa = ", "pa == ", parsed_labels))
-    }
-  ) +
-  scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 15, augmented = 16),  # Add this line
-                     breaks = c("normal", "augmented"),
-                     labels = c("Coalescent", "Augmented")) +
-  guides(color = guide_legend(order = 1, title = "Simulator"),
-         shape = guide_legend(order = 2)) +
-  theme_bw() +
-  xlab("True omega value") +
-  ylab("Estimated value") +
-  theme(text = element_text(size = 12), legend.position = "none")
-
-
-
-p_alpha_tips_co500 <- ggplot(cis_tips_500_co, aes(x = true_alpha, y = alpha,
-                                                  shape = likelihood,
-                                                  colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
-            maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
-  scale_y_log10(breaks = c(0.0001, 0.01, 1, 100, 1000),
-                labels = trans_format("log10", math_format(10^.x))) +
-  scale_colour_manual(
-    values = cbbPalette[c(4,6)],
-    breaks = levels(cis_tips_500_co$simulator_pa_R0),
-    labels = function(x) {
-      parsed_labels <- sapply(x, function(label) {
-        parts <- strsplit(label, ": ")[[1]]
-        prefix <- parts[1]
-        parts2 <- strsplit(parts[2], "\\|")[[1]]
-        pa_value <- trimws(parts2[1])
-        r_value <- sub("R\\[0\\]\\s*%~~%\\s*(\\d+\\.?\\d*)", "\\1", trimws(parts2[2]))
-        paste0(prefix, ": ", pa_value, " * ' | ' * R[0] %~~% ", r_value)
-      })
-      parse(text = gsub("pa = ", "pa == ", parsed_labels))
-    }
-  ) +
-  scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 15, augmented = 16),  # Add this line
-                     breaks = c("normal", "augmented"),
-                     labels = c("Coalescent", "Augmented")) +
-  guides(color = guide_legend(order = 1, title = "Simulator"),
-         shape = guide_legend(order = 2)) +
-  theme_bw() +
-  xlab("True alpha value") +
-  ylab("Estimated value") +
-  theme(text = element_text(size = 12), legend.position = "none")
-
-
-
-p_omega_tips_au500 <- ggplot(cis_tips_500_au, aes(x = true_omega, y = omega,
-                                                  shape = likelihood, colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
-            maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
-  scale_colour_manual(
-    values = cbbPalette[c(4,6)],
-    breaks = levels(cis_tips_500_au$simulator_pa_R0),
-    labels = function(x) {
-      parsed_labels <- sapply(x, function(label) {
-        parts <- strsplit(label, ": ")[[1]]
-        prefix <- parts[1]
-        parts2 <- strsplit(parts[2], "\\|")[[1]]
-        pa_value <- trimws(parts2[1])
-        r_value <- sub("R\\[0\\]\\s*%~~%\\s*(\\d+\\.?\\d*)", "\\1", trimws(parts2[2]))
-        paste0(prefix, ": ", pa_value, " * ' | ' * R[0] %~~% ", r_value)
-      })
-      parse(text = gsub("pa = ", "pa == ", parsed_labels))
-    }
-  ) +
-  scale_shape_manual(name = "Likelihood",
-                     values = c(normal = 15, augmented = 16),  # Add this line
-                     breaks = c("normal", "augmented"),
-                     labels = c("Coalescent", "Augmented")) +
-  guides(color = guide_legend(order = 1, title = "Simulator"),
-         shape = guide_legend(order = 2)) +
-  theme_bw() +
-  xlab("True omega value") +
-  ylab("Estimated value") +
-  theme(text = element_text(size = 12), legend.position = "none")
-
-
-
-p_alpha_tips_au500 <- ggplot(cis_tips_500_au, aes(x = true_alpha, y = alpha,
-                                                  shape = likelihood,
-                                                  colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
-            maxwidth = 0.8) +
-  geom_sina(data = add_true_values_tips, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_tips, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1.2, shape = 23) +
   scale_y_log10(breaks = c(0.0001, 0.01, 1, 100, 1000),
                 labels = trans_format("log10", math_format(10^.x))) +
   scale_colour_manual(
@@ -853,9 +556,9 @@ ggsave(filename = "sina_plots_tips_500tips.pdf",
 #sina plots for omega for diversitree for 1000 tips ----
 p_omega_dst_co1000 <- ggplot(cis_dst_1000_co, aes(x = true_omega, y = omega,
                                                   shape = likelihood, colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
+  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_dst, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_dst, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(7,8)],
     breaks = levels(cis_dst_1000_co$simulator_pa_R0),
@@ -887,9 +590,9 @@ p_omega_dst_co1000 <- ggplot(cis_dst_1000_co, aes(x = true_omega, y = omega,
 p_alpha_dst_co1000 <- ggplot(cis_dst_1000_co, aes(x = true_alpha, y = alpha,
                                                   shape = likelihood,
                                                   colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
+  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_dst, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_dst, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1.2, shape = 23) +
   scale_y_log10(breaks = c(0.0001, 0.01, 1, 100, 1000),
                 labels = trans_format("log10", math_format(10^.x))) +
   scale_colour_manual(
@@ -922,9 +625,9 @@ p_alpha_dst_co1000 <- ggplot(cis_dst_1000_co, aes(x = true_alpha, y = alpha,
 
 p_omega_dst_au1000 <- ggplot(cis_dst_1000_au, aes(x = true_omega, y = omega,
                                                   shape = likelihood, colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
+  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_dst, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_dst, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(7,8)],
     breaks = levels(cis_dst_1000_au$simulator_pa_R0),
@@ -956,9 +659,9 @@ p_omega_dst_au1000 <- ggplot(cis_dst_1000_au, aes(x = true_omega, y = omega,
 p_alpha_dst_au1000 <- ggplot(cis_dst_1000_au, aes(x = true_alpha, y = alpha,
                                                   shape = likelihood,
                                                   colour = simulator_pa_R0)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.3, alpha = 0.8,
+  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_dst, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_dst, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(7,8)],
     breaks = levels(cis_dst_1000_au$simulator_pa_R0),
@@ -992,7 +695,7 @@ p_omega_dst_co500 <- ggplot(cis_dst_500_co, aes(x = true_omega, y = omega,
                                                 shape = likelihood, colour = simulator_pa_R0)) +
   geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_dst, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_dst, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(7,8)],
     breaks = levels(cis_dst_500_co$simulator_pa_R0),
@@ -1026,7 +729,7 @@ p_alpha_dst_co500 <- ggplot(cis_dst_500_co, aes(x = true_alpha, y = alpha,
                                                 colour = simulator_pa_R0)) +
   geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_dst, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_dst, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1.2, shape = 23) +
   scale_y_log10(breaks = c(0.0001, 0.01, 1, 100, 1000),
                 labels = trans_format("log10", math_format(10^.x))) +
   scale_colour_manual(
@@ -1061,7 +764,7 @@ p_omega_dst_au500 <- ggplot(cis_dst_500_au, aes(x = true_omega, y = omega,
                                                 shape = likelihood, colour = simulator_pa_R0)) +
   geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_dst, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_dst, aes(x = true_omega, y = as.numeric(as.character(true_omega))), size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(7,8)],
     breaks = levels(cis_dst_500_au$simulator_pa_R0),
@@ -1095,7 +798,7 @@ p_alpha_dst_au500 <- ggplot(cis_dst_500_au, aes(x = true_alpha, y = alpha,
                                                 colour = simulator_pa_R0)) +
   geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
             maxwidth = 0.8) +
-  geom_sina(data = add_true_values_dst, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1, shape = 21) +
+  geom_sina(data = add_true_values_dst, aes(x = true_alpha, y = as.numeric(as.character(true_alpha))), size = 1.2, shape = 23) +
   scale_colour_manual(
     values = cbbPalette[c(7,8)],
     breaks = levels(cis_dst_500_au$simulator_pa_R0),

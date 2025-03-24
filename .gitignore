@@ -11,6 +11,6 @@ params2.csv
 mkdir_names.txt
 trees/
 vaccine_escape.R
-HIV_simulations/
-plot_stats_hivsim.R
 graphic_plots/
+trees_1000timeunits/
+trajectory_1000timeunits/

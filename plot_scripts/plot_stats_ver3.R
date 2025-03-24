@@ -75,10 +75,12 @@ coverage <- rbind(coverage_julia, coverage_tips)
 coverage["pa"] <- ifelse(coverage$param == 1 | coverage$param == 2,
                          0.85, 0.95)
 coverage["average_r0"] <- "R[0] %~~% 1.0"
+
 relative_error <- rbind(relative_error_julia, relative_error_tips)
 relative_error["pa"] <- ifelse(relative_error$param == 1 | relative_error$param == 2,
                                0.85, 0.95)
 relative_error["average_r0"] <- "R[0] %~~% 1.0"
+
 prop_inf <- rbind(prop_inf_julia, prop_inf_tips)
 prop_inf["pa"] <- ifelse(prop_inf$param == 1 | prop_inf$param == 2,
                          0.85, 0.95)
@@ -433,7 +435,20 @@ noup500_alpha <- ggplot(prop_inf_all_500, aes(x = true_alpha, y = alpha_percenta
   ylab("% replicates without upper bound") +
   theme(text = element_text(size = 12), legend.position = "none")
 
-#noup500_alpha + noup500_omega
+
+#quartz()
+
+#noup_all <- noup1000_alpha + noup1000_omega +
+#  noup500_alpha + noup500_omega +
+#  plot_annotation(tag_levels = 'A')
+
+
+
+
+#ggsave(filename = "no_upper_bound.pdf",plot = noup_all,  width = 18,
+#       height = 20, units = "cm")
+
+
 
 
 
@@ -641,7 +656,7 @@ rerr_alpha_500 <- ggplot(relerror_quant_500, aes(x = true_alpha )) +
 #rerr_alpha_500 + rerr_omega_500
 
 #make composite plot for 1000 individuals
-quartz()
+#quartz()
 all_plots <- p_alpha  + p_omega + co1000_alpha + co1000_omega +
   rerr_alpha_1000 + rerr_omega_1000 +
   plot_layout(ncol = 2, guides = "collect") +

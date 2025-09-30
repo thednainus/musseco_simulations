@@ -9,7 +9,7 @@ The plots in pdf format published in the paper can be found [here](https://githu
 ## Authors
 Fabricia F. Nascimento (thednainus@yahoo.com)
 
-Kieran O. Drake (
+Kieran O. Drake (k.o.drake@gmail.com)
 
 
 ## How to install it?

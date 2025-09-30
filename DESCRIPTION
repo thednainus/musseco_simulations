@@ -1,17 +1,23 @@
 Package: fitMuSSECo
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Package to simulate the data used in the MuSSeCo paper.
 Version: 0.1.0
-Authors@R: c(
-    person(
-      "Jane", "Doe",
-      email = "jane@example.com",
-      role = c("aut", "cre")
-    )
-  )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
-License: What license is it under?
+Authors@R: c(person(given = "Fabricia",
+             family = "Nascimento",
+             role = c("aut", "cre"),
+             email = "thednainus@yahoo.com",
+             comment = c(ORCID = "0000-0001-9426-6835")),
+           person(given = "Kieran",
+             family = "Drake",
+             role = "ctb",
+             email = "k.o.drake@gmail.com",
+             comment = c(ORCID = "0000-0002-1280-9523")))
+Description: In this research compendium you can find the scripts used to simulate
+    the data described in Drake et al. You can also find the scripts to 
+    create the plots described in the paper.
+Depends: R (>= 3.4.3)
+Suggests: ape, treedater, mlesky, ggplot2, pachwork, diversitree, TiPS
+License: LGPL
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3

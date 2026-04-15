@@ -18,11 +18,11 @@ omega_env <- 0.09
 s_v3 <- omega_v3 - 1
 s_env <- omega_env - 1
 
+#based on the mutation-selection balanced
+q10_v3 <-alpha_q10_mutsel_balance ( pa = pa, mu = mu_v3, gamma = 1/10.2 , omega = omega_v3, tol = 1e-3 )[[2]] # 0.01453918
 
-#q10_v3 <- alpha_v3 * mu_v3
-q10_v3 <- 0.01453918  #based on the mutation-selection balanced
-#q10_env <- alpha_env * mu_env
-q10_env <- 0.02264042 #based on the mutation-selection balanced
+#based on the mutation-selection balanced
+q10_env <- alpha_q10_mutsel_balance ( pa = pa, mu = mu_env, gamma = 1/10.2 , omega = omega_env, tol = 1e-3 )[[2]] #0.02264042
 
 
 #new parameters based on the coalescent data
@@ -40,11 +40,3 @@ hiv_params <- data.frame(beta = params$beta[1:2]*2,
 
 write.csv(x = hiv_params, file = "hiv_params.csv", quote = FALSE, row.names = FALSE)
 
-
-
-
-#alpha_q10_mutsel_balance( pa = pa,
-#                          mu = mu_env,
-#                          gamma = 0.09803922,
-#                          omega = omega_env,
-#                          tol = 1e-3)

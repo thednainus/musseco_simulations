@@ -18,15 +18,6 @@ cis_julia$true_omega <- as.factor(cis_julia$true_omega)
 cis_julia["gene"] <- ifelse(cis_julia$param == 2, "env", "V3")
 
 
-#get CIs for trees estimated timetrees ----
-# cis_julia_estr <- readRDS("results/CIs/hivsim_fit_results_treedater.rds")
-# cis_julia_estr["simulator"] <- "Estimated trees"
-# cis_julia_estr$true_alpha <- round(cis_julia_estr$true_alpha,2)
-# cis_julia_estr$true_alpha <- as.factor(cis_julia_estr$true_alpha)
-# cis_julia_estr$true_omega <- as.factor(cis_julia_estr$true_omega)
-# cis_julia_estr["gene"] <- ifelse(cis_julia_estr$param == 2, "env", "V3")
-
-
 all_cis <- subset(cis_julia, likelihood == "normal")
 
 
@@ -65,42 +56,36 @@ cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2"
 
 p_omega <- ggplot(all_cis, aes(x = param_omega, y = omega,
                            shape = simulator, colour = true_tmrca)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.8, alpha = 0.7,
-            maxwidth = 0.8) +
+  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
+            maxwidth = 0.8, shape = 15) +
   geom_sina(data = add_true_values2, aes(x = param_omega, y = as.numeric(as.character(true_omega))),
-            size = 1.6, shape = 18, alpha = 0.8, colour = "black") +
-  scale_shape_manual(name = "Tree type",
-                     values = c(Coalescent.jl = 15,  `Estimated trees` = 4),  # Add this line
-                     breaks = c("Coalescent.jl", "Estimated trees"),
-                     labels = c("True trees", "Estimated trees")) +
+            size = 1.5, shape = 18, alpha = 0.8, colour = "black") +
   scale_colour_manual(values = c("#E69F00", "#56B4E9")) +
-
   theme_bw() +
   xlab("True omega value") +
   ylab("Estimated value") +
-  theme(text = element_text(size = 11), legend.position = "none")
+  theme(text = element_text(size = 12), legend.position = "none")
 
 
 #quartz()
 p_alpha <- ggplot(all_cis, aes(x = param_alpha, y = alpha,
-                               colour = true_tmrca, shape = simulator)) +
-  geom_sina(position = position_dodge(width = 0.8), size = 0.8, alpha = 0.7,
-            maxwidth = 0.8) +
+                               colour = true_tmrca)) +
+  geom_sina(position = position_dodge(width = 0.8), size = 0.5, alpha = 0.8,
+            maxwidth = 0.8, shape = 15) +
   geom_sina(data = add_true_values2, aes(x = param_alpha, y = as.numeric(as.character(true_alpha))),
-            size = 1.6, shape = 18, alpha = 0.8, colour = "black") +
-  scale_shape_manual(name = "Tree type",
-                     values = c(Coalescent.jl = 15,  `Estimated trees` = 4),  # Add this line
-                     breaks = c("Coalescent.jl", "Estimated trees"),
-                     labels = c("True trees", "Estimated trees")) +
+            size = 1.5, shape = 18, alpha = 0.8, colour = "black") +
   scale_colour_manual(values = c("#E69F00", "#56B4E9")) +
   guides(color = guide_legend(order = 1, title = "TMRCA"),
          shape = guide_legend(order = 2)) +
   theme_bw() +
   xlab("True alpha value") +
   ylab("Estimated value") +
-  theme(text = element_text(size = 11), legend.position = "none")
+  theme(text = element_text(size = 12), legend.position = "none")
 
 
 #quartz()
-#p_alpha + p_omega
+plots_hiv_simulation <- p_alpha + p_omega
 
+ggsave(filename = "all_plots_HIVsim_coalescent_likelihood.pdf",
+       plot = plots_hiv_simulation,
+       width = 18, height = 7, units = "cm")

@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/921718352.svg)](https://doi.org/10.5281/zenodo.20745275)
+
 # MuSSeCo analysis
 This repository contains the research compendium organized as an R package for [Drake at al.](https://www.biorxiv.org/content/10.1101/2025.05.08.652803v1)
 
